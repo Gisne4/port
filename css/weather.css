@@ -1,0 +1,229 @@
+/* Openweathermap.... I can't afford any more fxk!!!*/
+.weather-container {
+  position: absolute;
+  right: 100px;
+  top: 40%;
+  display: grid;
+  gap: 20px;
+}
+
+.weather-property-container {
+  padding: 20px;
+  border: 4px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: var(--beer-color);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.774);
+}
+
+.current-temp {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.owm-weather-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.heading {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--orange-color);
+}
+
+.bold {
+  font-weight: bold;
+  color: #bb2323;
+  margin-bottom: 10px;
+}
+
+.weather-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weather-items li {
+  margin-bottom: 5px;
+  color: #722c2c;
+}
+
+.icon-wind-direction {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.icon-pressure {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+/*forecast */
+.forecastCon {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+
+.foreTitle {
+  text-align: center;
+  margin-block-end: 25px;
+  font-size: 60px;
+  font-family: "Cafe24Lovingu";
+  font-weight: 200;
+  color: rgb(226, 224, 224);
+  text-shadow: #504545 1px 1px 5px;
+}
+
+.horizontal-accordion-container {
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+.day-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  white-space: nowrap;
+}
+
+.day-list li {
+  background-color: #200a0a52;
+  border: 3px solid #504545;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 80px;
+  position: relative;
+}
+
+.day-list li.active {
+  width: 250px; /* Expanded width */
+  background-color: var(--beer-color);
+}
+
+.day-list li span,
+.day-list li .day-values,
+.day-list li .sub {
+  opacity: 0; /* Initially hide most content */
+  transition: opacity 0.3s ease-in-out 0.1s;
+  white-space: nowrap;
+}
+
+.day-list li span:first-child {
+  /* The date */
+  opacity: 1; /* Always show the date */
+  margin-bottom: 5px;
+  position: absolute;
+  top: 40%;
+  transition: 0.5s;
+}
+.day-list li.active span:first-child {
+  position: relative;
+  top: -20%;
+  transform: translate(0, 200%);
+  transition: 0.5s;
+}
+.day-list li.active span,
+.day-list li.active .day-values,
+.day-list li.active .sub {
+  opacity: 1; /* Show content when active */
+}
+
+.day-list li .day-values {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.day-list li .day-values img {
+  max-width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.day-list li.active .day-values img {
+  max-width: 70px;
+  margin-bottom: 10px;
+}
+
+.day-list li .sub {
+  text-align: center !important;
+  width: auto !important;
+  margin-top: 5px;
+}
+
+.hour-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin-top: 50px;
+  color: #f3f3f3;
+  text-shadow: #504545 1px 1px 5px;
+}
+
+.hour-list::-webkit-scrollbar {
+  display: none;
+}
+
+.hour-list li {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 15px;
+  border-right: 3px solid #af959598;
+  text-align: center;
+}
+
+.hour-list li:last-child {
+  border-right: none;
+}
+
+.hour-list li span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.hour-list li span:nth-child(1) {
+  font-weight: bold;
+}
+
+.one-day-values {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.one-day-values img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.one-day-values span {
+  font-size: 1em;
+}
+
+.hour-list li .des {
+  font-size: 0.8 em;
+  text-align: center;
+}

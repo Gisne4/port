@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3d</title>
+    <link rel="stylesheet" href="css/first_3d.css" />
+    <script src="js/first_3d.js"></script>
+    <script src="https://cdn.babylonjs.com/v7.54.1/babylon.js"></script>
+    <script src="babylon.glTF1FileLoader.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/jquery-transform.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/first_3d.js"></script>
+  </head>
+  <body>
+    <canvas id="renderCanvas" class="game"></canvas>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@babylonjs/viewer@preview/dist/babylon-viewer.esm.min.js"
+    ></script>
+    <babylon-viewer
+      source="https://playground.babylonjs.com/scenes/BoomBox.glb"
+    ></babylon-viewer>
+  </body>
+</html>
