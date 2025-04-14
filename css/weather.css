@@ -89,6 +89,8 @@
   margin: 0;
   display: flex;
   white-space: nowrap;
+  color: #e0e0e0;
+  text-shadow: #504545 1px 1px 5px;
 }
 
 .day-list li {

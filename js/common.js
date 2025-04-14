@@ -4,7 +4,24 @@ document.addEventListener("DOMContentLoaded", function () {
   var me = "mouseenter";
   var ml = "mouseleave";
   var bg = "background-color";
-
+  navigator.userAgentData
+    .getHighEntropyValues([
+      "architecture",
+      "model",
+      "platform",
+      "platformVersion",
+      "fullVersionList",
+      "brands",
+      "mobile",
+      "uaFullVersion",
+      "wow64",
+    ])
+    .then((ua) => {
+      console.log(ua);
+    })
+    .catch((error) => {
+      console.error("Error getting high-entropy user agent values:", error);
+    });
   loadHeader();
 
   //헤더 로딩
@@ -179,4 +196,22 @@ document.addEventListener("DOMContentLoaded", function () {
   bodyElement.style.display = "none";
   // Optionally disable initial scrolling
   bodyElement.style.overflow = "hidden";
+
+  function theGameOfAsteroids() {
+    const canvas = document.getElementById("asteroidsCanvas");
+    if (window.Asteroids && canvas) {
+      canvas.style.display = "block";
+      window.ASTEROIDSPLAYERS || (window.ASTEROIDSPLAYERS = []);
+      window.ASTEROIDSPLAYERS.push(new window.Asteroids(canvas));
+    } else {
+      console.error("Asteroids library failed to load or canvas not found.");
+    }
+  }
+
+  function hadHardDay() {
+    document
+      .getElementById("elementDestroyer")
+      .addEventListener("click", theGameOfAsteroids);
+  }
+  hadHardDay();
 });

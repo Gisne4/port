@@ -109,4 +109,45 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     backgroundColor: "#8928d4",
   });
+
+  // For destroyer
+  function destroyer() {
+    const button = document.getElementById("elementDestroyer");
+    const buttonTextSpans = button.querySelectorAll("span");
+    const shakeIntensity = 5;
+    const shakeDuration = 0.1;
+    const textRotateIntensity = 20;
+
+    button.addEventListener("mouseover", () => {
+      gsap.to(button, {
+        duration: shakeDuration,
+        x: Math.random() > 0.5 ? shakeIntensity : -shakeIntensity,
+        y: Math.random() > 0.5 ? shakeIntensity : -shakeIntensity,
+        rotation: Math.random() * 5 - 2.5,
+        yoyo: true,
+        repeat: 1,
+        onComplete: () => gsap.set(button, { x: 0, y: 0, rotation: 0 }),
+      });
+
+      gsap.to(buttonTextSpans, {
+        duration: shakeDuration * 0.8,
+        stagger: 0.04,
+        scale: (index) => gsap.utils.random(0.8, 1.2),
+        rotationX: (index) =>
+          gsap.utils.random(-textRotateIntensity * 2, textRotateIntensity * 2),
+        rotationZ: (index) =>
+          gsap.utils.random(-textRotateIntensity * 2, textRotateIntensity * 2),
+        yoyo: true,
+        repeat: 1,
+        ease: "elastic.out(1, 0.3)",
+        onComplete: () =>
+          gsap.set(buttonTextSpans, {
+            scale: 1,
+            rotationX: 0,
+            rotationZ: 0,
+          }),
+      });
+    });
+  }
+  destroyer();
 });
