@@ -61,6 +61,9 @@ function preload() {
 }
 
 function create() {
+  this.input.on("wheel", (pointer, deltaX, deltaY) => {
+    // Do nothing in Phaser, let the browser scroll
+  });
   this.add.image(0, 0, "background").setOrigin(0, 0);
   let levelData = this.cache.json.get("levelData");
 

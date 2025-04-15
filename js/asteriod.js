@@ -457,10 +457,12 @@ function Asteroids() {
     Object.assign(this.navigation.style, {
       fontFamily: "Arial,sans-serif",
       position: "fixed",
-      zIndex: "10001",
-      bottom: "20px",
-      right: "10px",
-      textAlign: "right",
+      zIndex: "100",
+      bottom: "100px",
+      right: "50px",
+      fontSize: "clamp(2vw,18px,4vw)",
+      color: "rgb(255, 255, 255)",
+      textShadow: "rgba(27, 25, 25, 0.64) 1px 1px 10px",
     });
     this.navigation.innerHTML = "(Press Esc to Quit) ";
     this.gameContainer.appendChild(this.navigation);

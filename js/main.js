@@ -201,6 +201,7 @@ PlayState.create = function () {
   this.game.add.image(0, 0, `background`);
   this._loadLevel(this.game.cache.getJSON(`level:1`));
   this._createHud();
+
   //add sfx name as jump
   this.sfx = {
     jump: this.game.add.audio(`sfx:jump`),
@@ -219,7 +220,7 @@ PlayState._onHeroVsKey = function (hero, key) {
 
 PlayState._onHeroVsDoor = function (hero, door) {
   this.sfx.door.play();
-  alert(`This is my First game, It likes kor Beer Cass.`);
+  alert(`This is my First game`);
   this.game.state.restart();
   // TODO: go to the next level instead
 };

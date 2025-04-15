@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("elementDestroyer");
     const buttonTextSpans = button.querySelectorAll("span");
     const shakeIntensity = 5;
-    const shakeDuration = 0.1;
+    const shakeDuration = 0.3;
     const textRotateIntensity = 20;
 
     button.addEventListener("mouseover", () => {
