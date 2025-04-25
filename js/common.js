@@ -4,24 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var me = "mouseenter";
   var ml = "mouseleave";
   var bg = "background-color";
-  navigator.userAgentData
-    .getHighEntropyValues([
-      "architecture",
-      "model",
-      "platform",
-      "platformVersion",
-      "fullVersionList",
-      "brands",
-      "mobile",
-      "uaFullVersion",
-      "wow64",
-    ])
-    .then((ua) => {
-      console.log(ua);
-    })
-    .catch((error) => {
-      console.error("Error getting high-entropy user agent values:", error);
-    });
+
   loadHeader();
 
   //헤더 로딩
@@ -30,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
       //로딩 관련 함수
       const response = await fetch("header.html");
       const headerContent = await response.text();
-      document.getElementById("header-container").innerHTML = headerContent;
+      const header = document.getElementById("header-container");
+      header.innerHTML += headerContent;
 
       //야랄 맞게 스크립트 로딩 다음 인식을 못해서 그냥 같이 넣어 버림... 헤더 함수 뭣같음
       $(".headerM").on("click", function () {
@@ -48,38 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
             transform: " translate(150vw)",
             transition: "0.5s",
           });
-        }
-      });
-
-      //헤더 스크롤 및 호버 관련 함수
-      //the scroll func doesn't work any more all that [data-scroll-container] clarified as new LocomotiveScroll in for_gasp.js I knew that I have to solve this conmflict, fuxk!!!!
-      $(".header")
-        .on(me, function () {
-          $(".header").css(bg, tb);
-        })
-        .on(ml, function () {
-          $(".header").css(bg, "rgba(0, 0, 0, 0.062)");
-        });
-      $(window).scroll(function () {
-        winTop = $(this).scrollTop();
-        if (winTop > 0) {
-          $(".header")
-            .css(bg, tb) //unscroll
-            .on(me, function () {
-              $(".header").css(bg, tb);
-            })
-            .on(ml, function () {
-              $(".header").css(bg, tb);
-            });
-        } else {
-          $(".header")
-            .css(bg, ob) //scrolled!
-            .on(me, function () {
-              $(".header").css(bg, tb);
-            })
-            .on(ml, function () {
-              $(".header").css(bg, ob);
-            });
         }
       });
     } catch (error) {

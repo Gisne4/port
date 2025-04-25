@@ -1,114 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // My gasp template for my project
 
-  // Fix initial scroll prevent when i scrolled occurre wiggle!
-  window.onload = function () {
-    setTimeout(() => {
-      locoScroll.scrollTo(0, { duration: 0, disableLerp: true });
-    }, 10);
-  };
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Initialize Locomotive Scroll for smooth scrolling
-  const locoScroll = new LocomotiveScroll({
-    el: document.querySelector("[data-scroll-container]"),
-    smooth: true,
-  });
-
-  // Sync Locomotive Scroll with GSAP ScrollTrigger
-  locoScroll.on("scroll", ScrollTrigger.update);
-  ScrollTrigger.scrollerProxy("[data-scroll-container]", {
-    scrollTop(value) {
-      return arguments.length
-        ? locoScroll.scrollTo(value, 0, 0)
-        : locoScroll.scroll.instance.scroll.y;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-  });
-  ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-  ScrollTrigger.refresh();
-  //GSAP Initialization end!!
-
-  // Text scrolling animation
-  gsap.to(".scrub-text", {
-    scrollTrigger: {
-      trigger: ".scrub-text",
-      scroller: "[data-scroll-container]",
-      start: "top 70%",
-      end: "top 50%",
-      scrub: true,
-    },
-    opacity: 1,
-    x: 500,
-    rotation: 5,
-  });
-
-  //rotate!!
-  gsap.to(".rotate-box", {
-    scrollTrigger: {
-      trigger: ".rotate-box",
-      scroller: "[data-scroll-container]",
-      start: "top 60%",
-      end: "top 10%",
-      scrub: true,
-    },
-    rotation: 360,
-    scale: 1.5,
-  });
-
-  gsap.to(".fade-in", {
-    scrollTrigger: {
-      trigger: ".fade-in",
-      scroller: "[data-scroll-container]",
-      start: "top 60%",
-      end: "top 20%",
-      scrub: true,
-    },
-    opacity: 1,
-    y: 0, //transform : translateY(0)
-  });
-
-  gsap.to(".fade-in-ul", {
-    scrollTrigger: {
-      trigger: ".fade-in-ul",
-      scroller: "[data-scroll-container]",
-      start: "top 80%",
-      end: "top 50%",
-      scrub: true,
-    },
-    opacity: 1,
-    y: 0, //transform : translateY(0)
-  });
-
-  gsap.to(".background-change model-viewer", {
-    scrollTrigger: {
-      trigger: ".background-change ",
-      scroller: "[data-scroll-container]",
-      start: "top 60%",
-      end: "top 10%",
-      scrub: true,
-    },
-    backgroundColor: "#1e90ff",
-  });
-
-  gsap.to(".yeeSheepDucks", {
-    scrollTrigger: {
-      trigger: ".yeeSheepDucks",
-      scroller: "[data-scroll-container]",
-      start: "top 30%",
-      end: "top 0%",
-      scrub: true,
-    },
-    backgroundColor: "#8928d4",
-  });
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   // For destroyer
   function destroyer() {
@@ -150,4 +43,153 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   destroyer();
+
+  function scroll() {
+    const container = document.querySelector(".container");
+    const divs = gsap.utils.toArray(".container > div");
+    const navDots = gsap.utils.toArray(".nav-dot");
+
+    divs.forEach((div, index) => {
+      ScrollTrigger.create({
+        trigger: div,
+        scroller: container,
+        start: "top center",
+        end: "bottom center",
+        snap: 1 / (div.length - 1),
+        onEnter: () => setActiveDot(index),
+        onEnterBack: () => setActiveDot(index),
+        markers: false,
+      });
+    });
+    ("");
+    navDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        gsap.to(container, {
+          duration: 1,
+          scrollTo: divs[index],
+          ease: "power2.inOut",
+        });
+      });
+    });
+
+    function setActiveDot(index) {
+      navDots.forEach((dot) => dot.classList.remove("active"));
+      navDots[index].classList.add("active");
+    }
+
+    setActiveDot(0);
+
+    let isScrolling = false;
+
+    container.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+
+        if (!isScrolling) {
+          isScrolling = true;
+          const currentScroll = container.scrollTop;
+          const deltaY = e.deltaY;
+          const scrollAmount = window.innerHeight;
+
+          let targetScroll =
+            currentScroll + (deltaY > 0 ? scrollAmount : -scrollAmount);
+          targetScroll = Math.max(
+            0,
+            Math.min(
+              targetScroll,
+              container.scrollHeight - container.clientHeight
+            )
+          );
+
+          gsap.to(container, {
+            duration: 1.2,
+            scrollTo: targetScroll,
+            ease: "power2.inOutt",
+            onComplete: () => {
+              isScrolling = false;
+            },
+          });
+        }
+      },
+      { passive: false }
+    );
+
+    // Text scrolling animation
+    gsap.to(".scrub-text", {
+      scrollTrigger: {
+        trigger: ".scrub-text",
+        scroller: container,
+        start: "top 70%",
+        end: "top 50%",
+        scrub: true,
+      },
+      opacity: 1,
+      x: 500,
+      rotation: 10,
+    });
+
+    //rotate!!
+    gsap.to(".rotate-box", {
+      scrollTrigger: {
+        trigger: ".rotate-box",
+        scroller: container,
+        start: "top 60%",
+        end: "top 10%",
+        scrub: true,
+      },
+      rotation: 360,
+      scale: 1.5,
+      transformOrigin: "center center",
+    });
+
+    gsap.to(".fade-in", {
+      scrollTrigger: {
+        trigger: ".fade-in",
+        scroller: container,
+        start: "top 60%",
+        end: "top 20%",
+        scrub: true,
+      },
+      opacity: 1,
+      y: 0, //transform : translateY(0)
+    });
+
+    gsap.to(".fade-in-ul", {
+      scrollTrigger: {
+        trigger: ".fade-in-ul",
+        scroller: container,
+        start: "top 80%",
+        end: "top 50%",
+        scrub: true,
+      },
+      opacity: 1,
+      y: 0, //transform : translateY(0)
+    });
+
+    gsap.to(".background-change model-viewer", {
+      scrollTrigger: {
+        trigger: ".background-change ",
+        scroller: container,
+        start: "top 60%",
+        end: "top 10%",
+        scrub: true,
+      },
+      backgroundColor: "#1e90ff",
+      immediateRender: false,
+    });
+
+    gsap.to(".yeeSheepDucks", {
+      scrollTrigger: {
+        trigger: ".yeeSheepDucks",
+        scroller: container,
+        start: "top 30%",
+        end: "top 0%",
+        scrub: true,
+      },
+      backgroundColor: "#8928d4",
+      immediateRender: false,
+    });
+  }
+  scroll();
 });

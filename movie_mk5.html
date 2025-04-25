@@ -1,0 +1,815 @@
+<!-- code by KRLEE who was always Drunken LOL~-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRLEE's Movie DB</title>
+    <link rel="shortcut icon" href="img/logo.svg" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        background-color: #111;
+        color: #fff;
+      }
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+      :root {
+        --orange-color: #99833ab6;
+      }
+      .container {
+        width: 95%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .visual {
+        height: 600px;
+        margin-block-start: 120px;
+        margin-block-end: 30px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px;
+      }
+      .visual .slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .visual .slider .panel {
+        position: relative;
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        padding: 0px;
+        margin: 0px;
+        flex-shrink: 0;
+      }
+      .visual .slider .panel .movie-item {
+        height: 100%;
+        background-size: contain;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 50px;
+        box-sizing: border-box;
+      }
+      .visual .slider .panel .movie-item .slide-content {
+        max-width: 500px;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .visual .slider .panel .movie-item .slide-title {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+      .visual .slider .panel .movie-item .slide-overview {
+        font-size: 1.1em;
+        line-height: 1.5;
+        color: #eee;
+      }
+      .visual .slider .navi {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .visual .slider .navi li {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0.8;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .visual .slider .navi li.on {
+        opacity: 1;
+        background: #ffc300;
+      }
+      .visual .slider .left,
+      .visual .slider .right {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+      }
+      .visual .slider .left:hover,
+      .visual .slider .right:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+      .visual .slider .left {
+        left: 20px;
+      }
+      .visual .slider .right {
+        right: 20px;
+      }
+
+      .con1 {
+        margin-bottom: 30px;
+        padding: 20px;
+        background-color: #1a1a1a;
+        border-radius: 10px;
+      }
+      .con1 h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #ffc300;
+      }
+      .con1 .search-container {
+        margin-bottom: 30px;
+      }
+      .con1 input[type="text"] {
+        padding: 12px 15px;
+        width: 70%;
+        border: 1px solid #444;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: #222;
+        color: #eee;
+        font-size: 1em;
+      }
+      .con1 {
+        padding: 8px 20px;
+        background-color: #1a14038e;
+        color: #111;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 5px 3px 10px var(--orange-color);
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      .con1 .search-active {
+        display: inline-block;
+      }
+
+      .con2,
+      .con3,
+      .con4 {
+        margin-bottom: 30px;
+        padding: 20px;
+        background-color: #1a1a1a;
+        border-radius: 10px;
+        height: 673px;
+        overflow: hidden;
+        position: relative;
+      }
+      .con2 h2,
+      .con3 h2,
+      .con4 h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #ffc300;
+      }
+
+      .upcoming-More,
+      .popular-More {
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%);
+        background-color: #1a1a1a;
+        border: 1px solid #444;
+        box-shadow: #ccc 1px 1px 3px;
+        color: #ccc;
+      }
+
+      #pagination,
+      #upcoming-pagination {
+        margin: 50px auto;
+        text-align: center;
+      }
+      #pagination button,
+      #upcoming-pagination button {
+        margin-inline: max(10px);
+        background-color: #1a1a1a;
+        border: 1px solid #444;
+        box-shadow: #ccc 1px 1px 3px;
+        color: #ccc;
+      }
+      #pagination button.active,
+      #upcoming-pagination button.active {
+        background-color: #ffffff;
+        border: 1px solid #444;
+        box-shadow: #ccc 1px 1px 3px;
+        color: #131010;
+      }
+      .movie-list {
+        display: grid;
+        margin-inline: 100px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .movie-list .movie-item {
+        background-color: #222;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .movie-list .movie-item:hover {
+        transform: scale(1.05);
+      }
+      .movie-list .movie-item img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      .movie-list .movie-item h3 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        color: #eee;
+      }
+      .movie-list .movie-item p {
+        font-size: 0.9em;
+        color: #ccc;
+      }
+      .movie-list .movie-item .overview {
+        display: none;
+        font-size: 0.8em;
+        color: #ddd;
+        margin-top: 10px;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 80%;
+        padding: 10px;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+      .movie-list .movie-item:hover .overview {
+        display: block;
+        top: 0;
+      }
+
+      .movie-list .movie-item.fade-out {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .movie-list .movie-item.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .con4 {
+        background-color: #111;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .con4 h2 {
+        color: #fff;
+        padding-left: 20px;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+      }
+      .con4 .ads {
+        height: 200px;
+        background-color: #333;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        margin: 20px;
+        text-align: center;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="visual">
+        <div class="slider">
+          <ul class="panel"></ul>
+          <ul class="navi"></ul>
+          <div class="left"><i class="fa-solid fa-chevron-left"></i></div>
+          <div class="right"><i class="fa-solid fa-chevron-right"></i></div>
+        </div>
+      </div>
+      <div class="con1">
+        <h2>Search Movies</h2>
+        <div class="search-container">
+          <input
+            type="text"
+            id="search-query"
+            placeholder="Enter movie title"
+          />
+        </div>
+        <div id="results-container" class="movie-list"></div>
+      </div>
+      <div class="con2">
+        <h2>Popular Movies</h2>
+        <div id="popular-container" class="movie-list"></div>
+        <div id="pagination"></div>
+        <button class="popular-More" data-target=".con2">SHOW MORE</button>
+      </div>
+      <div class="con3">
+        <h2>Upcoming Movies</h2>
+        <div id="upcoming-container" class="movie-list"></div>
+        <div id="upcoming-pagination"></div>
+        <button class="upcoming-More" data-target=".con3">SHOW MORE</button>
+      </div>
+    </div>
+    <script>
+      const apiKey = "f710f4911d740be4e790af0963540a1a";
+      const searchBaseUrl = "https://api.themoviedb.org/3/search/movie";
+      const genreBaseUrl = "https://api.themoviedb.org/3/genre/movie";
+      const topRatedBaseUrl = "https://api.themoviedb.org/3/movie/top_rated";
+      const popularBaseUrl = "https://api.themoviedb.org/3/movie/popular";
+      const upcomingBaseUrl = "https://api.themoviedb.org/3/movie/upcoming";
+      const imageBaseUrl = "https://image.tmdb.org/t/p/w500";
+      const resultsContainer = document.getElementById("results-container");
+      const popularContainer = document.getElementById("popular-container");
+      const upcomingContainer = document.getElementById("upcoming-container");
+      const slider = document.querySelector(".slider");
+      const panel = document.querySelector(".panel");
+      const naviBar = document.querySelector(".navi");
+      const leftArrow = document.querySelector(".left");
+      const rightArrow = document.querySelector(".right");
+      const searchInput = document.getElementById("search-query");
+      const paginationContainer = document.getElementById("pagination");
+      const upcomingPaginationContainer = document.getElementById(
+        "upcoming-pagination"
+      );
+      const popular_More = document.querySelector(".popular-More");
+      const upcoming_More = document.querySelector(".upcoming-More");
+
+      let movieCount = 20;
+      let panelIndex = 0;
+      let slideInterval;
+      let slideSpeed = 5000;
+      let autoSlideEnabled = true;
+      let currentPage = {};
+      let totalPages = 1;
+
+      const failToLoadImg = [
+        "https://media1.tenor.com/m/z1trlblpCbEAAAAC/aqua-aaaaa.gif",
+        "https://media1.tenor.com/m/opSIiZBx2FYAAAAd/anime-wiz.gif",
+        "https://media1.tenor.com/m/iQAin82SBm8AAAAC/anime-megumin.gif",
+        "https://media1.tenor.com/m/B_czDLYKWooAAAAC/kono-subarashii-sekai-ni-shukufuku-wo-konosuba.gif",
+        "https://media1.tenor.com/m/QFMcD1rbvd8AAAAd/cat-fail.gif",
+        "https://media1.tenor.com/m/AnOBZjEjJj4AAAAd/cat.gif",
+        "https://media1.tenor.com/m/aJeIvS0AuHcAAAAd/cat1.gif",
+        "https://media1.tenor.com/m/0yJbcfwQyu8AAAAC/cry-crying.gif",
+        "https://media1.tenor.com/m/ufPsZFFomo4AAAAd/crying-cat-sad-cat.gif",
+        "https://media1.tenor.com/m/g0WD7z3Oz2AAAAAd/give-me-my-change.gif",
+      ];
+
+      function changeClass(element, index) {
+        element.forEach((item) => item.classList.remove("on"));
+        element[index].classList.add("on");
+      }
+
+      function showSlide(index) {
+        panelIndex = index;
+        panel.style.transform = `translateX(-${index * (100 / movieCount)}%)`;
+        const naviItems = document.querySelectorAll(".navi li");
+        if (naviItems.length > 0) {
+          changeClass(naviItems, index);
+        }
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      function nextSlide() {
+        const nextIndex = (panelIndex + 1) % movieCount;
+        showSlide(nextIndex);
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      function prevSlide() {
+        const prevIndex = (panelIndex - 1 + movieCount) % movieCount;
+        showSlide(prevIndex);
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, slideSpeed);
+      }
+
+      function stopAutoSlide() {
+        clearInterval(slideInterval);
+      }
+
+      function updateOverviewPosition(overviewDiv, event) {
+        const movieItem = event.target.closest(".movie-item");
+        if (!movieItem) return;
+
+        const rect = movieItem.getBoundingClientRect();
+        const offsetX =
+          event.clientX - rect.left - overviewDiv.offsetWidth / 2 - 125;
+        const offsetY =
+          event.clientY - rect.top - overviewDiv.offsetHeight - 30;
+        overviewDiv.style.position = `fixed`;
+        overviewDiv.style.left = `${offsetX}px`;
+        overviewDiv.style.top = `${offsetY}px`;
+      }
+
+      async function fetchMovies(
+        url,
+        container,
+        isSlider = false,
+        paginationContainer = null
+      ) {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (isSlider) {
+            // make this para for inject main visual slider function
+            panel.innerHTML = "";
+            naviBar.innerHTML = "";
+            //movieCount = 0;
+          } else {
+            container.innerHTML = "";
+          }
+
+          if (data.total_pages && paginationContainer) {
+            renderPagination(
+              url.split("?")[0],
+              container,
+              paginationContainer,
+              data.total_pages
+            );
+          }
+          if (data.results && data.results.length > 0) {
+            panel.style.width = `${movieCount * 100}%`;
+
+            data.results.forEach((movie, index) => {
+              const movieDiv = document.createElement("div");
+              movieDiv.classList.add("movie-item");
+
+              if (isSlider) {
+                movieDiv.style.backgroundImage = `url(${imageBaseUrl}${movie.backdrop_path})`;
+                movieDiv.style.backgroundSize = "cover";
+                movieDiv.style.backgroundPosition = "center";
+
+                const slideContent = document.createElement("div");
+                slideContent.classList.add("slide-content");
+                slideContent.innerHTML = `
+                                              <h3 class="slide-title">${
+                                                movie.title
+                                              }</h3>
+                                              ${
+                                                movie.overview
+                                                  ? `<p class="slide-overview">${movie.overview}</p>`
+                                                  : `<p>아직은 정보가 준비되지; 않은것 같아요! 열심히 찾아보겠습니다!</p>`
+                                              }
+                                          `;
+                movieDiv.appendChild(slideContent);
+                panel.appendChild(movieDiv);
+
+                const panelItems = document.querySelectorAll(
+                  ".visual .slider .panel .movie-item"
+                );
+
+                panelItems.forEach((item) => {
+                  item.style.width = `calc(100% / ${movieCount})`;
+                });
+
+                const naviItem = document.createElement("li");
+                naviItem.addEventListener("click", () => {
+                  showSlide(index);
+                  stopAutoSlide();
+                  startAutoSlide();
+                });
+                naviBar.appendChild(naviItem);
+                //movieCount++;
+                if (index === 0) {
+                  naviItem.classList.add("on");
+                }
+              } else {
+                const movieContent = document.createElement("div");
+                movieContent.innerHTML = `
+                                              ${
+                                                movie.poster_path == null
+                                                  ? `<img src="${
+                                                      failToLoadImg[
+                                                        Math.floor(
+                                                          Math.random() *
+                                                            failToLoadImg.length
+                                                        )
+                                                      ]
+                                                    }"><p>으악! 이미지 로딩실패!</p><p>에러가 아니라 ! db에 없는거에요 !!</p><p>절대로 제탓이 아니에요!</p>
+                                                    `
+                                                  : `<img src="${imageBaseUrl}${movie.poster_path}" alt="Poster">`
+                                              }
+                                              <h3>${movie.title}</h3>
+                                              <p>Release: ${
+                                                movie.release_date
+                                              }</p>
+                                              <p>평점: ${movie.vote_average}</p>
+                                              ${
+                                                movie.overview
+                                                  ? `<div class="overview">${movie.overview}</div>`
+                                                  : `<div class="overview">아직 정보가 없습니다! </br> 정보가 나오는데로 업데이트 하겠습니다!</div>`
+                                              }
+
+                                          `;
+                movieDiv.appendChild(movieContent);
+                container.appendChild(movieDiv);
+                movieDiv.addEventListener("mousemove", (event) => {
+                  const overviewDiv = movieDiv.querySelector(".overview");
+                  if (overviewDiv) {
+                    updateOverviewPosition(overviewDiv, event);
+                  }
+                });
+              }
+            });
+            if (isSlider && movieCount > 0) {
+              showSlide(0);
+              startAutoSlide();
+            }
+          } else {
+            container.innerHTML = "<p>No movies found.</p>";
+            if (isSlider) {
+              panel.innerHTML = "<p>No movies found.</p>";
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          container.innerHTML = "<p>An error occurred while fetching data.</p>";
+          if (isSlider) {
+            panel.innerHTML = "<p>An error occurred while fetching data.</p>";
+          }
+        } finally {
+          if (!isSlider) {
+            observeMovieItems();
+          }
+        }
+      }
+
+      async function searchMovies() {
+        const query = document.getElementById("search-query").value;
+
+        const apiUrl = `${searchBaseUrl}?api_key=${apiKey}&language=ko-KR&query=${encodeURIComponent(
+          query
+        )}`;
+
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+
+          resultsContainer.innerHTML = "";
+
+          if (data.results && data.results.length > 0) {
+            data.results.forEach((movie) => {
+              const movieDiv = document.createElement("div");
+              movieDiv.classList.add("movie-item");
+              const movieContent = document.createElement("div");
+              movieContent.innerHTML = `
+                                              ${
+                                                movie.poster_path == null
+                                                  ? `<img src="${
+                                                      failToLoadImg[
+                                                        Math.floor(
+                                                          Math.random() *
+                                                            failToLoadImg.length
+                                                        )
+                                                      ]
+                                                    }"  id"failed"><p>으악! 이미지 로딩실패!</p><p>에러가 아니라 ! db에 없는거에요 !!</p><p>절대로 제탓이 아니에요!</p>
+                                                    <a style="color:#eee; text-decoration:none" href="${
+                                                      failToLoadImg[
+                                                        Math.floor(
+                                                          Math.random() *
+                                                            failToLoadImg.length
+                                                        )
+                                                      ]
+                                                    }">대신에 짤을 드릴께요!</a>`
+                                                  : `<img src="${imageBaseUrl}${movie.poster_path}" alt="Poster">`
+                                              }
+
+                                              <h3>${movie.title}</h3>
+                                              <p>Release: ${
+                                                movie.release_date
+                                              }</p>
+                                              <p>평점: ${movie.vote_average}</p>
+                                              ${
+                                                movie.overview
+                                                  ? `<div class="overview">${movie.overview}</div>`
+                                                  : `<div class="overview">아직 정보가 없습니다! </br> 정보가 나오는데로 업데이트 하겠습니다!</div>`
+                                              }
+                                          `;
+              movieDiv.appendChild(movieContent);
+              resultsContainer.appendChild(movieDiv);
+              movieDiv.addEventListener("mousemove", (event) => {
+                const overviewDiv = movieDiv.querySelector(".overview");
+                if (overviewDiv) {
+                  updateOverviewPosition(overviewDiv, event);
+                }
+              });
+            });
+          } else {
+            resultsContainer.innerHTML =
+              "<p>No movies found matching your search.</p>";
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          resultsContainer.innerHTML =
+            "<p>An error occurred while fetching data.</p>";
+        } finally {
+          observeMovieItems();
+        }
+      }
+
+      leftArrow.addEventListener("click", () => {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
+
+      rightArrow.addEventListener("click", () => {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      });
+
+      slider.addEventListener("mouseenter", stopAutoSlide);
+      slider.addEventListener("mouseleave", startAutoSlide);
+
+      searchInput.addEventListener("input", () => {
+        searchMovies();
+      });
+
+      function handleShowMore(event) {
+        const button = event.target;
+        const targetClass = button.dataset.target;
+        const container = document.querySelector(targetClass);
+
+        if (container) {
+          container.style.height = "auto";
+          button.style.display = "none";
+        }
+      }
+
+      popular_More.addEventListener("click", handleShowMore);
+      upcoming_More.addEventListener("click", handleShowMore);
+
+      function loadMoviesPages(page, baseUrl, container, section = "popular") {
+        let url = `${baseUrl}?api_key=${apiKey}&language=ko-KR&page=${page}`;
+        fetchMovies(
+          url,
+          container,
+          false,
+          section === "popular"
+            ? paginationContainer
+            : upcomingPaginationContainer
+        );
+        currentPage[section] = page;
+      }
+
+      function renderPagination(
+        baseUrl,
+        container,
+        paginationContainer,
+        totalPagesForSection
+      ) {
+        paginationContainer.innerHTML = "";
+        const visiblePages = 5;
+        const section = baseUrl === popularBaseUrl ? "popular" : "upcoming";
+        const currentPageForSection = currentPage[section] || 1;
+        const totalPages = totalPagesForSection;
+
+        let startPage = Math.max(
+          1,
+          currentPageForSection - Math.floor(visiblePages / 2)
+        );
+        let endPage = Math.min(totalPages, startPage + visiblePages - 1);
+
+        if (endPage - startPage < visiblePages - 1) {
+          startPage = Math.max(1, endPage - visiblePages + 1);
+        }
+
+        if (currentPageForSection > 1) {
+          const prevButton = document.createElement("button");
+          prevButton.textContent = "이전";
+          prevButton.addEventListener("click", () => {
+            loadMoviesPages(
+              currentPageForSection - 1,
+              baseUrl,
+              container,
+              section
+            );
+            window.scrollTo({
+              top: container.offsetParent.offsetTop,
+              behavior: "smooth",
+            });
+          });
+          paginationContainer.appendChild(prevButton);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          const pageButton = document.createElement("button");
+          pageButton.textContent = i;
+          if (i === currentPageForSection) {
+            pageButton.classList.add("active");
+          }
+          pageButton.addEventListener("click", () => {
+            loadMoviesPages(i, baseUrl, container, section);
+            window.scrollTo({
+              top: container.offsetParent.offsetTop,
+              behavior: "smooth",
+            });
+          });
+          paginationContainer.appendChild(pageButton);
+        }
+
+        if (currentPageForSection < totalPages) {
+          const nextButton = document.createElement("button");
+          nextButton.textContent = "다음";
+          nextButton.addEventListener("click", () => {
+            loadMoviesPages(
+              currentPageForSection + 1,
+              baseUrl,
+              container,
+              section
+            );
+            window.scrollTo({
+              top: container.offsetParent.offsetTop,
+              behavior: "smooth",
+            });
+          });
+          paginationContainer.appendChild(nextButton);
+        }
+      }
+
+      // Intersection Observer for movie item fade-in
+      function observeMovieItems() {
+        const movieItems = document.querySelectorAll(".movie-list .movie-item");
+        const option = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("fade-in");
+            } else {
+              entry.target.classList.remove("fade-in");
+            }
+          });
+        }, option);
+
+        movieItems.forEach((item) => {
+          item.classList.add("fade-out");
+          observer.observe(item);
+        });
+      }
+
+      loadMoviesPages(1, popularBaseUrl, popularContainer, "popular");
+      loadMoviesPages(1, upcomingBaseUrl, upcomingContainer, "upcoming");
+
+      fetchMovies(
+        `${topRatedBaseUrl}?api_key=${apiKey}&language=ko-KR&page=${Math.floor(
+          Math.random() * 5 + 1
+        )}`,
+        panel,
+        true
+      );
+      observeMovieItems();
+    </script>
+  </body>
+</html>

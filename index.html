@@ -35,7 +35,7 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
 
     <script src="js/asteriod.js"></script>
@@ -82,330 +82,344 @@
       id="asteroidsCanvas"
       style="display: none; position: fixed; z-index: 100"
     ></canvas>
-    <button class="montserrat" id="elementDestroyer">
-      <span>D</span>
-      <span>e</span>
-      <span>s</span>
-      <span>t</span>
-      <span>r</span>
-      <span>o</span>
-      <span>y</span>
-      <span>!</span>
-    </button>
-    <div id="header-container"></div>
-    <div data-scroll-container>
-      <div class="container">
+
+    <div id="header-container">
+      <div class="header-Float" id="header-Float">
+        <img
+          src="img/belowTheHeader.svg"
+          alt=""
+          style="
+            position: fixed;
+            top: 50px;
+            z-index: 10;
+            width: 8000px;
+            left: 50%;
+            transform: translate(-50%);
+          "
+        />
+        <iframe
+          src="clock.html"
+          id="floatingFrame"
+          style="
+            position: absolute;
+            top: -100px;
+            left: 40%;
+            transform: scale(0.4) translate(-45%, -50%);
+            width: 610px;
+            height: 610px;
+            border: unset;
+            z-index: 20;
+          "
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="navigation-dots">
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+    </div>
+
+    <div class="container">
+      <div class="visual">
         <div class="snow_zone"></div>
+        <video autoplay muted loop playsinline src="video/blanc.mp4"></video>
+        <!--phaser 버젼 충돌을 해결하기 위해 그냥 새로운창을 따로 맹글음-->
+        <iframe
+          src="platform.html"
+          id="floatingFrame_0"
+          style="
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 620px;
+            border: unset;
+            z-index: 2;
+          "
+        ></iframe>
 
-        <div class="visual">
-          <video autoplay muted loop playsinline src="video/blanc.mp4"></video>
-          <!--phaser 버젼 충돌을 해결하기 위해 그냥 새로운창을 따로 맹글음-->
-          <iframe
-            src="platform.html"
-            id="floatingFrame_0"
-            style="
-              position: absolute;
-              top: 50%;
-              left: 30%;
-              transform: translate(-50%, -50%);
-              width: 1000px;
-              height: 620px;
-              border: unset;
-              z-index: 2;
-            "
-          ></iframe>
-          <iframe
-            src="clock.html"
-            id="floatingFrame"
-            style="
-              position: absolute;
-              top: 50%;
-              left: 80%;
-              transform: translate(-50%, -50%);
-              width: 610px;
-              height: 610px;
-              border: unset;
-              z-index: 2;
-            "
-          ></iframe>
-          <div
-            class="type_container"
-            style="z-index: 10; text-shadow: 1px 1px 10px black"
-          >
-            <h1>
-              I am a
-              <span
-                style="text-decoration: underline"
-                class="typed montserrat beer-typed"
-                data-typed-items="Developer, Designer, Creator"
-              ></span>
-            </h1>
-          </div>
-          <div
-            class="grab-a-beer stroke_black animated-up-down"
-            id="clickToggle"
-          >
-            <h1>And why Don't u Grab a Beer and play this little game?</h1>
-          </div>
-        </div>
-
-        <div class="con1" style="background-color: bisque">
-          <ul class="yeeSheepDucks animated-moe-gap">
-            <li class="moemoe fade-in">
-              <model-viewer
-                src="img/BarramundiFish.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe background-change">
-              <model-viewer
-                src="img/Avocado.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe rotate-box">
-              <model-viewer
-                src="img/Duck.glb"
-                alt="COLLADA Duckling"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe background-change">
-              <model-viewer
-                src="img/Avocado.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe fade-in">
-              <model-viewer
-                src="img/Fox.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-
-            <li class="moemoe background-change">
-              <model-viewer
-                src="img/Avocado.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe rotate-box">
-              <model-viewer
-                src="img/Duck.glb"
-                alt="COLLADA Duckling"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe background-change">
-              <model-viewer
-                src="img/Avocado.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe rotate-box">
-              <model-viewer
-                src="img/Duck.glb"
-                alt="COLLADA Duckling"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-            <li class="moemoe background-change">
-              <model-viewer
-                src="img/Avocado.glb"
-                alt="A 3D model"
-                shadow-intensity="1"
-                auto-rotate
-                rotation-per-second="180deg"
-                ar
-              >
-              </model-viewer>
-            </li>
-          </ul>
-          <div class="oDuck scrub-text">
-            <h1>
-              오리를 좋아 하시나요? 저도 좋아합니다! <br />
-              양념&gt;로스&gt;훈제 순으로 좋아합니다<br />
-              장난입니다, 각설하고! 의성마늘은 유명한 술안주죠!
-            </h1>
-            <button class="btn">
-              <div class="btnc"></div>
-              <p>VIEW MORE</p>
-              <span class="btnp"></span>
-            </button>
-            <button class="btn btn2">
-              <div class="btnc"></div>
-              <p>VIEW MORE</p>
-              <span class="btnp btnp2"></span>
-            </button>
-            <img src="img/cat-dance.gif" alt="" />
-          </div>
-        </div>
         <div
-          class="con2"
-          id="weather_bg"
-          style="background-color: rgb(25, 37, 37)"
+          class="type_container"
+          style="z-index: 10; text-shadow: 1px 1px 10px black"
         >
-          <!--weather-->
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            id="weather_bg_video"
-            src="video/blanc.mp4"
-          ></video>
+          <h1>
+            I am a
+            <span
+              style="text-decoration: underline"
+              class="typed montserrat beer-typed"
+              data-typed-items="Developer, Designer, Creator"
+            ></span>
+          </h1>
+        </div>
+        <div class="grab-a-beer stroke_black animated-up-down" id="clickToggle">
+          <h1>And why Don't u Grab a Beer and play this little game?</h1>
+        </div>
+      </div>
 
-          <div class="weather-container fade-in-ul montserrat">
-            <div class="weather-property-container">
-              <div>
-                <span id="time" style="font-weight: 700">Loading...</span>
-                <h2 style="margin-top: 0px" id="location">Loading...</h2>
-              </div>
-              <div class="current-temp">
-                <svg
-                  width="50px"
-                  height="50px"
-                  viewBox="0 0 148 148"
-                  class="owm-weather-icon"
-                  id="weather-icon-svg"
-                >
-                  <path
-                    d="M110.117 74c0 19.947-16.17 36.117-36.117 36.117-19.947 0-36.117-16.17-36.117-36.117 0-19.948 16.17-36.117 36.117-36.117 19.947 0 36.117 16.169 36.117 36.117"
-                    fill="#3b3c40"
-                  ></path>
-                </svg>
-                <span class="heading" id="temperature">Loading...</span>
-              </div>
-              <div class="bold" id="description">Loading...</div>
-              <ul
-                class="weather-items text-container orange-side standard-padding"
+      <div class="con1" style="background-color: bisque">
+        <ul class="yeeSheepDucks animated-moe-gap">
+          <li class="moemoe fade-in">
+            <model-viewer
+              src="img/BarramundiFish.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe background-change">
+            <model-viewer
+              src="img/Avocado.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe rotate-box">
+            <model-viewer
+              src="img/Duck.glb"
+              alt="COLLADA Duckling"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe background-change">
+            <model-viewer
+              src="img/Avocado.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe fade-in">
+            <model-viewer
+              src="img/Fox.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+
+          <li class="moemoe background-change">
+            <model-viewer
+              src="img/Avocado.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe rotate-box">
+            <model-viewer
+              src="img/Duck.glb"
+              alt="COLLADA Duckling"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe background-change">
+            <model-viewer
+              src="img/Avocado.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe rotate-box">
+            <model-viewer
+              src="img/Duck.glb"
+              alt="COLLADA Duckling"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+          <li class="moemoe background-change">
+            <model-viewer
+              src="img/Avocado.glb"
+              alt="A 3D model"
+              shadow-intensity="1"
+              auto-rotate
+              rotation-per-second="180deg"
+              ar
+            >
+            </model-viewer>
+          </li>
+        </ul>
+        <div class="oDuck scrub-text">
+          <h1>
+            오리를 좋아 하시나요? 저도 좋아합니다! <br />
+            양념&gt;로스&gt;훈제 순으로 좋아합니다<br />
+            장난입니다, 각설하고! 의성마늘은 유명한 술안주죠!
+          </h1>
+          <button class="btn">
+            <div class="btnc"></div>
+            <p>VIEW MORE</p>
+            <span class="btnp"></span>
+          </button>
+          <button class="btn btn2">
+            <div class="btnc"></div>
+            <p>VIEW MORE</p>
+            <span class="btnp btnp2"></span>
+          </button>
+          <img src="img/cat-dance.gif" alt="" />
+        </div>
+      </div>
+      <div
+        class="con2"
+        id="weather_bg"
+        style="background-color: rgb(25, 37, 37)"
+      >
+        <!--weather-->
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          id="weather_bg_video"
+          src="video/blanc.mp4"
+        ></video>
+
+        <div class="weather-container fade-in-ul montserrat">
+          <div class="weather-property-container">
+            <div>
+              <span id="time" style="font-weight: 700">Loading...</span>
+              <h2 style="margin-top: 0px" id="location">Loading...</h2>
+            </div>
+            <div class="current-temp">
+              <svg
+                width="50px"
+                height="50px"
+                viewBox="0 0 148 148"
+                class="owm-weather-icon"
+                id="weather-icon-svg"
               >
-                <li>
-                  <div class="wind-line">
-                    <svg
-                      viewBox="0 0 1000 1000"
-                      enable-background="new 0 0 1000 1000"
-                      xml:space="preserve"
-                      class="icon-wind-direction"
-                      id="wind-direction"
-                    >
-                      <g fill=" rgb(61, 36, 173)">
-                        <path
-                          d="M510.5,749.6c-14.9-9.9-38.1-9.9-53.1,1.7l-262,207.3c-14.9,11.6-21.6,6.6-14.9-11.6L474,48.1c5-16.6,14.9-18.2,21.6,0l325,898.7c6.6,16.6-1.7,23.2-14.9,11.6L510.5,749.6z"
-                        ></path>
-                        <path
-                          d="M817.2,990c-8.3,0-16.6-3.3-26.5-9.9L497.2,769.5c-5-3.3-18.2-3.3-23.2,0L210.3,976.7c-19.9,16.6-41.5,14.9-51.4,0c-6.6-9.9-8.3-21.6-3.3-38.1L449.1,39.8C459,13.3,477.3,10,483.9,10c6.6,0,24.9,3.3,34.8,29.8l325,898.7c5,14.9,5,28.2-1.7,38.1C837.1,985,827.2,990,817.2,990z M485.6,716.4c14.9,0,28.2,5,39.8,11.6l255.4,182.4L485.6,92.9l-267,814.2l223.9-177.4C454.1,721.4,469,716.4,485.6,716.4z"
-                        ></path>
-                      </g>
-                    </svg>
-                    <span id="wind">Loading...</span>
-                  </div>
-                </li>
-                <li>
+                <path
+                  d="M110.117 74c0 19.947-16.17 36.117-36.117 36.117-19.947 0-36.117-16.17-36.117-36.117 0-19.948 16.17-36.117 36.117-36.117 19.947 0 36.117 16.169 36.117 36.117"
+                  fill="#3b3c40"
+                ></path>
+              </svg>
+              <span class="heading" id="temperature">Loading...</span>
+            </div>
+            <div class="bold" id="description">Loading...</div>
+            <ul
+              class="weather-items text-container orange-side standard-padding"
+            >
+              <li>
+                <div class="wind-line">
                   <svg
-                    width="20px"
-                    height="20px"
-                    viewBox="0 0 96 96"
-                    class="icon-pressure"
+                    viewBox="0 0 1000 1000"
+                    enable-background="new 0 0 1000 1000"
+                    xml:space="preserve"
+                    class="icon-wind-direction"
+                    id="wind-direction"
                   >
-                    <g
-                      transform="translate(0,96) scale(0.100000,-0.100000)"
-                      fill="#48484a"
-                      stroke="none"
-                    >
+                    <g fill=" rgb(61, 36, 173)">
                       <path
-                        d="M351 854 c-98 -35 -179 -108 -227 -202 -27 -53 -29 -65 -29 -172 0 -107 2 -119 29 -172 38 -75 104 -141 180 -181 58 -31 66 -32 176 -32 110 0 118 1 175 32 77 40 138 101 178 178 31 57 32 65 32 175 0 110 -1 118 -32 176 -40 76 -106 142 -181 179 -49 25 -71 29 -157 32 -73 2 -112 -1 -144 -13z m259 -80 c73 -34 126 -86 161 -159 24 -50 29 -73 29 -135 0 -62 -5 -85 -29 -135 -57 -119 -161 -185 -291 -185 -130 0 -234 66 -291 185 -24 50 -29 73 -29 135 0 130 66 234 185 291 82 40 184 41 265 3z"
+                        d="M510.5,749.6c-14.9-9.9-38.1-9.9-53.1,1.7l-262,207.3c-14.9,11.6-21.6,6.6-14.9-11.6L474,48.1c5-16.6,14.9-18.2,21.6,0l325,898.7c6.6,16.6-1.7,23.2-14.9,11.6L510.5,749.6z"
                       ></path>
                       <path
-                        d="M545 600 c-35 -35 -68 -60 -80 -60 -27 0 -45 -18 -45 -45 0 -33 -50 -75 -89 -75 -18 0 -41 -5 -53 -11 -20 -11 -20 -11 3 -35 12 -13 33 -24 46 -24 17 0 23 -6 23 -23 0 -13 10 -33 23 -45 30 -28 47 -13 47 43 0 32 6 47 28 68 15 15 37 27 48 27 26 0 44 18 44 44 0 12 26 47 60 81 l60 61 -28 27 -28 27 -59 -60z"
+                        d="M817.2,990c-8.3,0-16.6-3.3-26.5-9.9L497.2,769.5c-5-3.3-18.2-3.3-23.2,0L210.3,976.7c-19.9,16.6-41.5,14.9-51.4,0c-6.6-9.9-8.3-21.6-3.3-38.1L449.1,39.8C459,13.3,477.3,10,483.9,10c6.6,0,24.9,3.3,34.8,29.8l325,898.7c5,14.9,5,28.2-1.7,38.1C837.1,985,827.2,990,817.2,990z M485.6,716.4c14.9,0,28.2,5,39.8,11.6l255.4,182.4L485.6,92.9l-267,814.2l223.9-177.4C454.1,721.4,469,716.4,485.6,716.4z"
                       ></path>
                     </g>
                   </svg>
-                  <span id="pressure">Loading...</span>
-                </li>
-                <li>
-                  <span class="symbol">Humidity:</span>
-                  <span id="humidity">Loading...</span>
-                </li>
-                <li>
-                  <span class="symbol">Dew point:</span>
-                  <span id="dewpoint">Loading...</span>
-                </li>
-                <li>
-                  <span class="symbol">Visibility:</span>
-                  <span id="visibility">Loading...</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="forecastCon fade-in-ul">
-            <h3 class="foreTitle">
-              Hellow Please do Not Ask for Me The Further Future!
-            </h3>
-            <ul class="day-list" id="forecast"></ul>
-            <ul class="hour-list" id="easyFore"></ul>
-          </div>
-        </div>
-        <div class="con3">
-          <div class="skillCon">
-            <iframe
-              class=""
-              src="characterUi.html"
-              style="
-                width: 900px;
-                height: 700px;
-                position: absolute;
-                right: 40px;
-                top: 50%;
-                transform: translate(0px, -50%);
-              "
-              frameborder="0"
-            ></iframe>
+                  <span id="wind">Loading...</span>
+                </div>
+              </li>
+              <li>
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 96 96"
+                  class="icon-pressure"
+                >
+                  <g
+                    transform="translate(0,96) scale(0.100000,-0.100000)"
+                    fill="#48484a"
+                    stroke="none"
+                  >
+                    <path
+                      d="M351 854 c-98 -35 -179 -108 -227 -202 -27 -53 -29 -65 -29 -172 0 -107 2 -119 29 -172 38 -75 104 -141 180 -181 58 -31 66 -32 176 -32 110 0 118 1 175 32 77 40 138 101 178 178 31 57 32 65 32 175 0 110 -1 118 -32 176 -40 76 -106 142 -181 179 -49 25 -71 29 -157 32 -73 2 -112 -1 -144 -13z m259 -80 c73 -34 126 -86 161 -159 24 -50 29 -73 29 -135 0 -62 -5 -85 -29 -135 -57 -119 -161 -185 -291 -185 -130 0 -234 66 -291 185 -24 50 -29 73 -29 135 0 130 66 234 185 291 82 40 184 41 265 3z"
+                    ></path>
+                    <path
+                      d="M545 600 c-35 -35 -68 -60 -80 -60 -27 0 -45 -18 -45 -45 0 -33 -50 -75 -89 -75 -18 0 -41 -5 -53 -11 -20 -11 -20 -11 3 -35 12 -13 33 -24 46 -24 17 0 23 -6 23 -23 0 -13 10 -33 23 -45 30 -28 47 -13 47 43 0 32 6 47 28 68 15 15 37 27 48 27 26 0 44 18 44 44 0 12 26 47 60 81 l60 61 -28 27 -28 27 -59 -60z"
+                    ></path>
+                  </g>
+                </svg>
+                <span id="pressure">Loading...</span>
+              </li>
+              <li>
+                <span class="symbol">Humidity:</span>
+                <span id="humidity">Loading...</span>
+              </li>
+              <li>
+                <span class="symbol">Dew point:</span>
+                <span id="dewpoint">Loading...</span>
+              </li>
+              <li>
+                <span class="symbol">Visibility:</span>
+                <span id="visibility">Loading...</span>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="con4"></div>
+        <div class="forecastCon fade-in-ul">
+          <h3 class="foreTitle">
+            Hellow Please do Not Ask for Me The Further Future!
+          </h3>
+          <ul class="day-list" id="forecast"></ul>
+          <ul class="hour-list" id="easyFore"></ul>
+        </div>
+      </div>
+      <div class="con3">
+        <div class="movieContainer">
+          <iframe
+            id="movieFrame"
+            src="movie_mk5.html"
+            style="width: 100%; height: 100vh"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </div>
+      <div class="con4">
+        <button class="montserrat" id="elementDestroyer">
+          <span>D</span>
+          <span>e</span>
+          <span>s</span>
+          <span>t</span>
+          <span>r</span>
+          <span>o</span>
+          <span>y</span>
+          <span>!</span>
+        </button>
       </div>
     </div>
     <footer></footer>
