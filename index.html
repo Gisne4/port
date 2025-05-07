@@ -37,7 +37,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
-
+    <link
+      rel="stylesheet"
+      href="https://chinese-fonts-cdn.deno.dev/packages/pfgzt/dist/平方公子体/result.css"
+    />
     <script src="js/asteriod.js"></script>
     <script src="js/common.js" defer></script>
     <link rel="shortcut icon" href="img/logo.svg" type="image/x-icon" />
@@ -45,6 +48,7 @@
     <script src="js/main.js"></script>
     <script src="js/weather.js"></script>
     <script src="js/for_gasp.js"></script>
+    <script src="js/starLight.js"></script>
 
     <title>KRLEE</title>
   </head>
@@ -83,36 +87,29 @@
       style="display: none; position: fixed; z-index: 100"
     ></canvas>
 
-    <div id="header-container">
+    <header class="header">
+      <ul class="menu_pc montserrat">
+        <li><a href="#">ABOUT</a></li>
+        <li><a href="#">GAME</a></li>
+        <li><a href="#">SOMETHIG</a></li>
+        <li><a href="#">HELLOW</a></li>
+      </ul>
+      <ul class="menu_mo montserrat">
+        <li><a href="#">ABOUT</a></li>
+        <li><a href="#">GAME</a></li>
+        <li><a href="#">SOMETHIG</a></li>
+        <li><a href="#">HELLOW</a></li>
+      </ul>
+      <a href="javascript:void(0)" class="headerM">
+        <div class="tata1"></div>
+        <div class="bibi"></div>
+        <div class="tata2"></div>
+      </a>
       <div class="header-Float" id="header-Float">
-        <img
-          src="img/belowTheHeader.svg"
-          alt=""
-          style="
-            position: fixed;
-            top: 50px;
-            z-index: 10;
-            width: 8000px;
-            left: 50%;
-            transform: translate(-50%);
-          "
-        />
-        <iframe
-          src="clock.html"
-          id="floatingFrame"
-          style="
-            position: absolute;
-            top: -100px;
-            left: 40%;
-            transform: scale(0.4) translate(-45%, -50%);
-            width: 610px;
-            height: 610px;
-            border: unset;
-            z-index: 20;
-          "
-        ></iframe>
+        <img class="belowTheHeader" src="img/belowTheHeader.svg" alt="" />
+        <iframe src="clock.html" id="floatingFrame" class="clock"></iframe>
       </div>
-    </div>
+    </header>
 
     <div class="navigation-dots">
       <div class="nav-dot"></div>
@@ -125,23 +122,23 @@
     <div class="container">
       <div class="visual">
         <div class="snow_zone"></div>
-        <video autoplay muted loop playsinline src="video/blanc.mp4"></video>
+
+        <canvas class="star-canvas"></canvas>
         <!--phaser 버젼 충돌을 해결하기 위해 그냥 새로운창을 따로 맹글음-->
         <iframe
           src="platform.html"
           id="floatingFrame_0"
           style="
             position: absolute;
-            top: 50%;
-            left: 30%;
-            transform: translate(-50%, -50%);
+            top: 500px;
+            left: 550px;
             width: 1000px;
             height: 620px;
             border: unset;
             z-index: 2;
           "
+          class="opacity"
         ></iframe>
-
         <div
           class="type_container"
           style="z-index: 10; text-shadow: 1px 1px 10px black"
@@ -154,6 +151,10 @@
               data-typed-items="Developer, Designer, Creator"
             ></span>
           </h1>
+        </div>
+        <img src="img/globe.png" alt="globe" class="globe center" />
+        <div class="crucialy-round center" data-splitting>
+          清茶一杯敬远客，相逢一笑意自明。
         </div>
         <div class="grab-a-beer stroke_black animated-up-down" id="clickToggle">
           <h1>And why Don't u Grab a Beer and play this little game?</h1>

@@ -114,7 +114,29 @@ html::selection {
   background-color: var(--orange-color); /* Highlight color */
   border-color: var(--beer-color);
 }
-
+.header-Float {
+  position: absolute;
+  width: 100vw;
+  height: 400px;
+}
+.belowTheHeader {
+  position: absolute;
+  top: 225px;
+  z-index: 1;
+  width: 8000px;
+  left: 45%;
+  transform: translate(-50%);
+}
+.clock {
+  position: absolute;
+  top: 85px;
+  left: 35%;
+  transform: scale(0.4) translate(-45%, -50%);
+  width: 610px;
+  height: 610px;
+  border: unset;
+  z-index: 20;
+}
 .header {
   position: fixed;
   width: 90%;
@@ -192,10 +214,12 @@ html::selection {
   background-color: rgb(255, 255, 255);
 }
 .header-Float {
-  display: none;
+  opacity: 1;
+  transition: 0.5s ease-in-out;
 }
 .opacity {
   opacity: 0;
+  transform: scale(0.3);
 }
 .tata1 {
   transition: 0.5s;
@@ -238,7 +262,8 @@ html::selection {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: rgb(195, 209, 209);
+  background-color: rgb(41, 38, 53);
+  transform-style: preserve-3d;
 }
 .visual video {
   width: 100%;
@@ -271,6 +296,47 @@ html::selection {
   position: absolute;
   top: 150px;
   left: 200px;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.globe {
+  width: 300px;
+  height: 300px;
+  z-index: 0;
+  filter: grayscale(1);
+}
+.crucialy-round {
+  transform-style: preserve-3d;
+  animation: round-and-round 12s linear infinite;
+  --deg: calc(360deg / var(--numchs));
+  z-index: 1;
+}
+@keyframes round-and-round {
+  0% {
+    transform: perspective(1000px) rotateY(360deg) rotateX(5deg);
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(0deg) rotateX(5deg);
+  }
+}
+.crucialy-round .char {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  color: white;
+  font-size: 4em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transform: rotateY(calc(var(--char-index) * var(--deg))) translateZ(250px);
+  font-family: "PING FANG GONG ZI TI";
+  font-weight: "600";
 }
 
 /*beer-waves */

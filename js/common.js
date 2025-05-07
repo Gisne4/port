@@ -5,40 +5,81 @@ document.addEventListener("DOMContentLoaded", function () {
   var ml = "mouseleave";
   var bg = "background-color";
 
-  loadHeader();
+  // loadHeader();
 
   //헤더 로딩
-  async function loadHeader() {
-    try {
-      //로딩 관련 함수
-      const response = await fetch("header.html");
-      const headerContent = await response.text();
-      const header = document.getElementById("header-container");
-      header.innerHTML += headerContent;
+  // async function loadHeader() {
+  //   try {
 
-      //야랄 맞게 스크립트 로딩 다음 인식을 못해서 그냥 같이 넣어 버림... 헤더 함수 뭣같음
-      $(".headerM").on("click", function () {
-        $(".tata1").toggleClass("line1");
-        $(".tata2").toggleClass("line2");
-        $(".bibi").toggleClass("opacity");
-        var papa = $(".bibi").css("opacity");
-        if (papa == 0) {
-          $(".menu_mo").css({
-            transform: " translate(0px)",
-            transition: "0.5s",
-          });
-        } else {
-          $(".menu_mo").css({
-            transform: " translate(150vw)",
-            transition: "0.5s",
-          });
-        }
+  //     //로딩 관련 함수
+  //     const response = await fetch("header.html");
+  //     const headerContent = await response.text();
+  //     const header = document.getElementById("header-container");
+  //     header.innerHTML = headerContent;
+
+  //     //야랄 맞게 스크립트 로딩 다음 인식을 못해서 그냥 같이 넣어 버림... 헤더 함수 뭣같음
+  $(".headerM").on("click", function () {
+    $(".tata1").toggleClass("line1");
+    $(".tata2").toggleClass("line2");
+    $(".bibi").toggleClass("opacity");
+    var papa = $(".bibi").css("opacity");
+    if (papa == 0) {
+      $(".menu_mo").css({
+        transform: " translate(0px)",
+        transition: "0.5s",
       });
-    } catch (error) {
-      console.error("Error loading header:", error);
+    } else {
+      $(".menu_mo").css({
+        transform: " translate(150vw)",
+        transition: "0.5s",
+      });
     }
-  }
+  });
+  //   } catch (error) {
+  //     console.error("Error loading header:", error);
+  //   }
+  // }
+  headerFloats();
+  function headerFloats() {
+    const container = document.querySelector(".container");
+    const header = document.getElementById("header-Float");
+    let previousScrollPosition = 0;
+    const tata = {
+      opacity: "0",
+      transition: "0.5s",
+      transform: "translateY(-100px)",
+    };
+    const mama = {
+      opacity: "1",
+      transition: "0.5s",
+      transform: "translateY(0px)",
+    };
+    container.addEventListener("scroll", () => {
+      const currentScrollPosition = container.scrollTop;
 
+      if (currentScrollPosition > previousScrollPosition) {
+        // gsap.to(header, {
+        //   duration: 0.3,
+        //   opacity: 0,
+        //   ease: "power2.inOut",
+        //   onComplete: () => {
+        //     header.style.display = "none";
+        //   },
+        // });
+        Object.assign(header.style, tata);
+      } else {
+        // header.style.display = "block";
+        // gsap.to(header, {
+        //   duration: 0.3,
+        //   opacity: 1,
+        //   ease: "power2.inOut",
+        // });
+        Object.assign(header.style, mama);
+      }
+
+      previousScrollPosition = currentScrollPosition;
+    });
+  }
   setInterval(function () {
     let t = $(".snow_zone .snow").length;
     if (t >= 8) {
@@ -166,4 +207,23 @@ document.addEventListener("DOMContentLoaded", function () {
       .addEventListener("click", theGameOfAsteroids);
   }
   hadHardDay();
+
+  function aroundTheWorld() {
+    const cround = document.querySelector(".crucialy-round");
+    const text = cround.innerHTML.trim(); // Note I am being lazy here and assuming the string has no unwanted whitespace
+    console.log(text);
+
+    cround.innerHTML = "";
+    cround.style.setProperty("--numchs", text.length);
+    for (let i = 0; i < text.length; i++) {
+      cround.innerHTML =
+        cround.innerHTML +
+        '<div class="char" style="--char-index: ' +
+        i +
+        ';">' +
+        text.charAt(i) +
+        "</div>";
+    }
+  }
+  aroundTheWorld();
 });

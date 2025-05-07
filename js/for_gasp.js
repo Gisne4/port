@@ -81,39 +81,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isScrolling = false;
 
-    container.addEventListener(
-      "wheel",
-      (e) => {
-        e.preventDefault();
+    // container.addEventListener(
+    //   "wheel",
+    //   (e) => {
+    //     e.preventDefault();
 
-        if (!isScrolling) {
-          isScrolling = true;
-          const currentScroll = container.scrollTop;
-          const deltaY = e.deltaY;
-          const scrollAmount = window.innerHeight;
+    //     if (!isScrolling) {
+    //       isScrolling = true;
+    //       const currentScroll = container.scrollTop;
+    //       const deltaY = e.deltaY;
+    //       const scrollAmount = window.innerHeight;
 
-          let targetScroll =
-            currentScroll + (deltaY > 0 ? scrollAmount : -scrollAmount);
-          targetScroll = Math.max(
-            0,
-            Math.min(
-              targetScroll,
-              container.scrollHeight - container.clientHeight
-            )
-          );
+    //       let targetScroll =
+    //         currentScroll + (deltaY > 0 ? scrollAmount : -scrollAmount);
+    //       targetScroll = Math.max(
+    //         0,
+    //         Math.min(
+    //           targetScroll,
+    //           container.scrollHeight - container.clientHeight
+    //         )
+    //       );
 
-          gsap.to(container, {
-            duration: 1.2,
-            scrollTo: targetScroll,
-            ease: "power2.inOutt",
-            onComplete: () => {
-              isScrolling = false;
-            },
-          });
-        }
-      },
-      { passive: false }
-    );
+    //       gsap.to(container, {
+    //         duration: 1.2,
+    //         scrollTo: targetScroll,
+    //         ease: "power2.inOutt",
+    //         onComplete: () => {
+    //           isScrolling = false;
+    //         },
+    //       });
+    //     }
+    //   },
+    //   { passive: false }
+    // );
 
     // Text scrolling animation
     gsap.to(".scrub-text", {
